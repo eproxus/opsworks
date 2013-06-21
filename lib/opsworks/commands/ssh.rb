@@ -50,9 +50,7 @@ module OpsWorks::Commands
         parameters.map{ |param| param.join(" ") }.join("\n  ")
       end
 
-      new_contents = "\n" << SSH_PREFIX
-      new_contents << instances.join("\n")
-      new_contents << "\n" << SSH_POSTFIX
+      new_contents = "\n#{SSH_PREFIX}\n#{instances.join("\n")}\n#{SSH_POSTFIX}"
 
       if options[:update]
         ssh_config = "#{ENV['HOME']}/.ssh/config"
