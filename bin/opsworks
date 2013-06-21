@@ -6,22 +6,8 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
 
 require 'rubygems'
 require 'bundler/setup'
-require 'aws-sdk'
-require 'awesome_print'
 
+require 'opsworks/cli'
 
-# Resolve bin path, ignoring symlinks
-require "pathname"
-bin_file = Pathname.new(__FILE__).realpath
-
-# Add self to libpath
-$:.unshift File.expand_path("../../lib", bin_file)
-
-require 'opsworks/config'
-
-config = OpsWorks.config
-
-client = AWS::OpsWorks::Client.new
-
-puts client.describe_stacks().stacks.find{ |s| s.stack_id == config.stack_id }.ai
+OpsWorks::CLI.start
 
