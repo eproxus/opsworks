@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Opsworks::VERSION
   spec.authors       = ["Adam Lindberg"]
   spec.email         = ["hello@alind.io"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Amazon OpsWorks CLI}
+  spec.summary       = %q{Command line interface for Amazon OpsWorks}
   spec.homepage      = ""
   spec.license       = "MIT"
 
