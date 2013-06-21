@@ -6,21 +6,22 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
 
 require 'rubygems'
 require 'bundler/setup'
-require 'inifile'
 require 'aws-sdk'
 require 'awesome_print'
 
-ini = IniFile.load(ENV["AWS_CONFIG_FILE"])
 
-aws_config = ini['default']
-AWS.config(
-  access_key_id: aws_config["aws_access_key_id"],
-  secret_access_key: aws_config["aws_secret_access_key"],
-)
+# Resolve bin path, ignoring symlinks
+require "pathname"
+bin_file = Pathname.new(__FILE__).realpath
 
-stack_id = ini['opsworks']['stack-id']
+# Add self to libpath
+$:.unshift File.expand_path("../../lib", bin_file)
+
+require 'opsworks/config'
+
+config = OpsWorks.config
 
 client = AWS::OpsWorks::Client.new
 
-puts client.describe_stacks().stacks.find{ |s| s.stack_id == stack_id }.ai
+puts client.describe_stacks().stacks.find{ |s| s.stack_id == config.stack_id }.ai
 
