@@ -36,7 +36,7 @@ module OpsWorks::Commands
       instances = result.instances.select { |i| i[:status] == "online" }
 
       instances.map! do |instance|
-        ip = instance[:public_ip] || instance[:elastic_ip]
+        ip = instance[:elastic_ip] || instance[:public_ip]
         parameters = {
           "Host"                  => "#{instance[:hostname]} #{ip}",
           "HostName"              => ip,
