@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
+  Pathname.new(__FILE__).realpath)
+
+require 'rubygems'
+require 'bundler/setup'
+require 'inifile'
+require 'aws-sdk'
+require 'awesome_print'
+
+ini = IniFile.load(ENV["AWS_CONFIG_FILE"])
+
+aws_config = ini['default']
+AWS.config(
+  access_key_id: aws_config["aws_access_key_id"],
+  secret_access_key: aws_config["aws_secret_access_key"],
+)
+
+stack_id = ini['opsworks']['stack-id']
+
+client = AWS::OpsWorks::Client.new
+
+puts client.describe_stacks().stacks.find{ |s| s.stack_id == stack_id }.ai
+
