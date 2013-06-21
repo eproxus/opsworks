@@ -4,6 +4,8 @@ Command line interface for Amazon OpsWorks.
 
 ## Commands
 
+Run `opsworks` with one of the following commands:
+
 * `ssh` Generate and update SSH configuration files
 
 ## Configuration
@@ -38,11 +40,6 @@ To use the gem in a project, add this to your `Gemfile`:
 And then execute:
 
     $ bundle
-
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
