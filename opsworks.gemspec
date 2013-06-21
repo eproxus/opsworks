@@ -13,7 +13,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/eproxus/opsworks"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
+  ignores = File.readlines('.gitignore').grep(/\S+/).map { |s| s.chomp }
+  spec.files = Dir["**/*"].reject do |f|
+    File.directory?(f) || ignores.any? { |i| File.fnmatch(i, f) }
+  end
+
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
