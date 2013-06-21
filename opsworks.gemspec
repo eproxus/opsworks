@@ -1,23 +1,25 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+
+root = File.expand_path('..', __FILE__)
+lib = File.expand_path('lib', root)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'opsworks/version'
+require 'opsworks/meta'
 
 Gem::Specification.new do |spec|
   spec.name          = "opsworks"
-  spec.version       = Opsworks::VERSION
-  spec.authors       = ["Adam Lindberg"]
-  spec.email         = ["hello@alind.io"]
-  spec.description   = %q{Amazon OpsWorks CLI}
-  spec.summary       = %q{Command line interface for Amazon OpsWorks}
+  spec.version       = OpsWorks::VERSION
+  spec.authors       = OpsWorks::AUTHORS
+  spec.email         = OpsWorks::EMAIL
+  spec.description   = OpsWorks::DESCRIPTION
+  spec.summary       = OpsWorks::SUMMARY
   spec.homepage      = "https://github.com/eproxus/opsworks"
   spec.license       = "MIT"
 
   ignores = File.readlines('.gitignore').grep(/\S+/).map { |s| s.chomp }
-  dotfiles = ['.gitignore']
-  spec.files = (Dir["**/*"].reject do |f|
+  spec.files = Dir["**/*"].reject do |f|
     File.directory?(f) || ignores.any? { |i| File.fnmatch(i, f) }
-  end + dotfiles)
+  end
+  spec.files += ['.gitignore']
 
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})

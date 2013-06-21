@@ -3,19 +3,15 @@ require 'opsworks'
 
 class OpsWorks::CLI
   def self.start
-    spec = Gem::Specification::load(File.expand_path(
-      "../../../opsworks.gemspec",
-      Pathname.new(__FILE__).realpath,
-    ))
-
     commands = %w(ssh)
 
     global_opts = Trollop::options do
-      version "opsworks #{spec.version} (c) #{spec.authors.join(", ")}"
+      version "opsworks #{OpsWorks::VERSION} " <<
+              "(c) #{OpsWorks::AUTHORS.join(", ")}"
       banner <<-EOS.unindent
         usage: opsworks [COMMAND] [OPTIONS...]
 
-        #{spec.summary}
+        #{OpsWorks::SUMMARY}
 
         Commands
           ssh       #{OpsWorks::Commands::SSH.banner}

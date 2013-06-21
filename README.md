@@ -1,4 +1,4 @@
-# Opsworks
+# OpsWorks CLI
 
 Command line interface for Amazon OpsWorks.
 

@@ -1,4 +1,4 @@
-require "opsworks/version"
+require "opsworks/meta"
 require "opsworks/config"
 require "opsworks/commands/ssh"
 
@@ -8,5 +8,6 @@ class String
   end
 end
 
-module Opsworks
+module OpsWorks
 end
+
