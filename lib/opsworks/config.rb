@@ -6,7 +6,7 @@ module OpsWorks
   end
 
   class Config
-    attr_reader :stack_id
+    attr_reader :stack_id, :ssh_user_name
 
     def initialize
       ini = IniFile.load(ENV["AWS_CONFIG_FILE"])
@@ -18,6 +18,7 @@ module OpsWorks
       )
 
       @stack_id = ini['opsworks']['stack-id']
+      @ssh_user_name = ini['opsworks']['ssh-user-name']
     end
   end
 end

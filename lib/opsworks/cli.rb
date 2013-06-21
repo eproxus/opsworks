@@ -1,20 +1,42 @@
 require 'trollop'
-require 'opsworks/config'
-require 'aws-sdk'
-require 'awesome_print'
+require 'opsworks'
 
 class OpsWorks::CLI
   def self.start
-    opts = Trollop::options do
+    spec = Gem::Specification::load(File.expand_path(
+      "../../../opsworks.gemspec",
+      Pathname.new(__FILE__).realpath,
+    ))
+
+    commands = %w(ssh)
+
+    global_opts = Trollop::options do
+      version "opsworks #{spec.version} (c) #{spec.authors.join(", ")}"
+      banner <<-EOS.unindent
+        usage: opsworks [COMMAND] [OPTIONS...]
+
+        #{spec.summary}
+
+        Commands
+          ssh       #{OpsWorks::Commands::SSH.banner}
+
+        For help with specific commands, run:
+          opsworks COMMAND -h/--help
+
+        Options:
+      EOS
+      stop_on commands
     end
 
-    config = OpsWorks.config
-
-    client = AWS::OpsWorks::Client.new
-
-    stack = client.describe_stacks().stacks.find do
-      |stack| stack.stack_id == config.stack_id
+    command = ARGV.shift
+    command_opts = case command
+      when "ssh"
+        OpsWorks::Commands::SSH.run
+      when nil
+        Trollop::die "no command specified"
+      else
+        Trollop::die "unknown command: #{command}"
     end
-    ap stack
+
   end
 end
