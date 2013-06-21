@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["hello@alind.io"]
   spec.description   = %q{Amazon OpsWorks CLI}
   spec.summary       = %q{Command line interface for Amazon OpsWorks}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/eproxus/opsworks"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
