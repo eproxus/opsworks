@@ -17,10 +17,10 @@ environment variable:
 
     [opsworks]
     stack-id=<MY STACK ID>
-    ssh-user=<MY SSH USER NAME>
+    ssh-user-name=<MY SSH USER NAME>
 
 The stack ID can be found in the stack settings, under _OpsWorks ID_. The
-`ssh-user` flag should be set to the username you want to use when logging in
+`ssh-user-name` value should be set to the username you want to use when logging in
 remotely, most probably the user name from your _My Settings_ page on OpsWorks.
 
 ## Installation
