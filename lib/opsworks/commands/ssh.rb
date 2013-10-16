@@ -31,8 +31,12 @@ module OpsWorks::Commands
 
       client = AWS::OpsWorks::Client.new
 
-      result = client.describe_instances(stack_id: config.stack_id)
-      instances = result.instances.select { |i| i[:status] != "stopped" }
+      instances = []
+
+      config.stacks.each do |stack_id|
+        result = client.describe_instances(stack_id: stack_id)
+        instances += result.instances.select { |i| i[:status] != "stopped" }
+      end
 
       instances.map! do |instance|
         ip = instance[:elastic_ip] || instance[:public_ip]
