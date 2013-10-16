@@ -1,5 +1,4 @@
 require 'aws-sdk'
-require 'awesome_print'
 require 'trollop'
 
 require 'opsworks'
