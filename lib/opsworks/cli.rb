@@ -5,7 +5,7 @@ class OpsWorks::CLI
   def self.start
     commands = %w(ssh)
 
-    global_opts = Trollop::options do
+    Trollop::options do
       version "opsworks #{OpsWorks::VERSION} " <<
               "(c) #{OpsWorks::AUTHORS.join(", ")}"
       banner <<-EOS.unindent
@@ -25,7 +25,7 @@ class OpsWorks::CLI
     end
 
     command = ARGV.shift
-    command_opts = case command
+    case command
       when "ssh"
         OpsWorks::Commands::SSH.run
       when nil
