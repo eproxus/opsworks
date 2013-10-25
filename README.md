@@ -17,8 +17,8 @@ Run `opsworks` with one of the following commands:
 This gem uses the same configuration file as the [AWS CLI][aws_cli]. This
 requires you to have a working AWS CLI setup before continuing.
 
-Add the following section to the file pointed out by the `AWS_CONFIG_FILE`
-environment variable:
+Add the following section to `~/.aws/config` or to the file pointed out by the
+`AWS_CONFIG_FILE` environment variable:
 
     [opsworks]
     stack-id=<MY STACK IDs>
