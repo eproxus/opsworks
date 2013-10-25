@@ -4,7 +4,7 @@ require 'trollop'
 require 'opsworks'
 
 SSH_PREFIX  = "# --- OpsWorks ---"
-SSH_POSTFIX = "# --- End of OpsWorks ---\n\n"
+SSH_POSTFIX = "# --- End of OpsWorks ---"
 
 module OpsWorks::Commands
   class SSH
@@ -53,7 +53,9 @@ module OpsWorks::Commands
         parameters.map{ |param| param.join(" ") }.join("\n  ")
       end
 
-      new_contents = "\n#{SSH_PREFIX}\n#{instances.join("\n")}\n#{SSH_POSTFIX}"
+      new_contents = "\n\n#{SSH_PREFIX}\n" <<
+                     "#{instances.join("\n")}\n" <<
+                     "#{SSH_POSTFIX}\n\n"
 
       if options[:update]
         ssh_config = "#{ENV['HOME']}/.ssh/config"
@@ -74,7 +76,10 @@ module OpsWorks::Commands
         end
 
         File.open(ssh_config, "w") do |file|
-          file.puts old_contents.gsub(/#{SSH_PREFIX}.*#{SSH_POSTFIX}/m, '')
+          file.puts old_contents.gsub(
+            /\n?\n?#{SSH_PREFIX}.*#{SSH_POSTFIX}\n?\n?/m,
+            ''
+          )
           file.puts new_contents
         end
 
