@@ -9,7 +9,7 @@ module OpsWorks
     attr_reader :stacks, :ssh_user_name
 
     def initialize
-      file = ENV["AWS_CONFIG_FILE"]
+      file = ENV["AWS_CONFIG_FILE"] || "#{ENV['HOME']}/.aws/config"
       raise "AWS config file not found" unless File.exists? file
       ini = IniFile.load(file)
 
