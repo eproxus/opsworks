@@ -1,5 +1,5 @@
 module OpsWorks
-  VERSION = "0.0.12"
+  VERSION = "0.0.13"
   AUTHORS = ["Adam Lindberg"]
   EMAIL = ["hello@alind.io"]
   DESCRIPTION = "Amazon OpsWorks CLI"
