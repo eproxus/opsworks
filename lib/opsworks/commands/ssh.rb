@@ -38,6 +38,7 @@ module OpsWorks::Commands
         instances += result.instances.select { |i| i[:status] != "stopped" }
       end
 
+      instances.reject! { |i| i[:elastic_ip].nil? && i[:public_ip].nil? }
       instances.map! do |instance|
         ip = instance[:elastic_ip] || instance[:public_ip]
         parameters = {
