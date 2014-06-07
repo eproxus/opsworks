@@ -12,6 +12,12 @@ Run `opsworks` with one of the following commands:
    instances with the same name in multiple stacks, the one from the first
    stack will be used by SSH.
 
+* `dsh` Generate and update dsh configuration files.
+
+   Instances are added in stack order to the dsh machines.list in $HOME/.dsh,
+   as per `ssh` above. A file is created in $HOME/.dsh/group for each layer
+   in each stack.
+
 ## Configuration
 
 This gem uses the same configuration file as the [AWS CLI][aws_cli]. This
