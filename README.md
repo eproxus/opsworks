@@ -28,7 +28,8 @@ The stack ID can be found in the stack settings, under _OpsWorks ID_ (or in the
 address bar of your browser as
 `console.aws.amazon.com/opsworks/home?#/stack/<STACK_ID>/stack`). You can add
 several stack IDs belonging to the same IAM account separated by commas
-(`stack-id=STACK1,...,STACKN`).
+(`stack-id=STACK1,...,STACKN`). If no stack-id is specified all accessible stacks 
+are used.
 
 The `ssh-user-name` value should be set to the username you want to use when
 logging in remotely, most probably the user name from your _My Settings_ page
