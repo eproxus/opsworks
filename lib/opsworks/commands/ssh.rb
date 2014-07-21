@@ -33,7 +33,14 @@ module OpsWorks::Commands
 
       instances = []
 
-      config.stacks.each do |stack_id|
+      stack_ids = if config.stacks.empty?
+        stacks = client.describe_stacks[:stacks]
+        stacks.map{|s| s[:stack_id]}
+      else
+        config.stacks
+      end
+
+      stack_ids.each do |stack_id|
         result = client.describe_instances(stack_id: stack_id)
         instances += result.instances.select { |i| i[:status] != "stopped" }
       end
